@@ -2,6 +2,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import './App.css';
 import {addClientActionCreator, removeClientActionCreator} from "./store/clientsReducer";
 import {addCashActionCreator, getCashActionCreator} from "./store/cashReducer";
+import {fetchClients} from "./asyncActions/getClientsFromServer";
 import {Button} from "@material-ui/core";
 
 function App() {
@@ -32,15 +33,25 @@ function App() {
             <div className="App-output">
                 {cash}
             </div>
-            <Button variant="contained" color="primary"
-                    onClick={() => addCash(Number(prompt()))}>ADD_CASH
+            <span>
+                <Button variant="contained" color="primary"
+                        onClick={() => addCash(Number(prompt()))}>ADD_CASH
             </Button>
-            <Button variant="contained" color="primary"
-                    onClick={() => getCash(Number(prompt()))}>GET_CASH
+                <Button variant="contained" color="primary"
+                        onClick={() => getCash(Number(prompt()))}>GET_CASH
             </Button>
-            <Button variant="contained" color="primary" onClick={() => addClient(prompt())}
-            >ADD_CLIENT
+            </span>
+            <span>
+                <Button variant="contained" color="primary"
+                        onClick={() => addClient(prompt())}>ADD_CLIENT
             </Button>
+            </span>
+            <span>
+                <Button variant="contained" color="primary"
+                        onClick={() => dispatch(fetchClients())}>GET_CLIENTS_FROM_SERVER
+            </Button>
+            </span>
+
             {clients.length > 0 ?
                 <div>
                     {clients.map(client =>
